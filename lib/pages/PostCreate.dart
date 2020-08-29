@@ -53,7 +53,7 @@ class PostCreate extends StatelessWidget {
                   String imageUrl = _imageUrlController.text;
                   PostModel pm = PostModel(id:1,title: title,content: content,imageUrl: imageUrl);
                   await PostModel.insertPost(pm);
-                  Navigator.pop(context);
+                  Navigator.pushReplacementNamed(context, "/home");
                 },
                 child: Text("Create Post"))
           ],

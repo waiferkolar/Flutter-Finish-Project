@@ -12,7 +12,7 @@ class _HomeState extends State<Home> {
 
   loadAllPost() async {
     posts = await PostModel.getAllPosts();
-    setState((){});
+    setState(() {});
   }
 
   initState() {
@@ -69,18 +69,27 @@ class _HomeState extends State<Home> {
                                 children: [
                                   GestureDetector(
                                     onTap: () {
-                                      Navigator.pushNamed(context, '/detail');
+                                      Global.currentId = posts[ind].id;
+                                      Navigator.pushNamed(context, '/post_edit');
                                     },
                                     child: Icon(Icons.edit, color: Colors.amber),
                                   ),
                                   SizedBox(width: 10),
                                   GestureDetector(
-                                    onTap: () {},
+                                    onTap: () async {
+                                      bool bol = await PostModel.deletePost(posts[ind].id);
+                                      if(bol) setState(() {
+                                          loadAllPost();
+                                      });
+                                    },
                                     child: Icon(Icons.delete, color: Colors.redAccent),
                                   ),
                                   SizedBox(width: 10),
                                   GestureDetector(
-                                    onTap: () {},
+                                    onTap: () {
+                                      Global.currentPost = posts[ind];
+                                      Navigator.pushNamed(context, "/detail");
+                                    },
                                     child: Icon(Icons.remove_red_eye, color: Colors.green),
                                   )
                                 ],

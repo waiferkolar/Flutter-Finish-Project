@@ -1,3 +1,4 @@
+import 'package:donno/models/PostModel.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart';
 class Global {
@@ -32,6 +33,8 @@ class Global {
     of Lorem Ipsum, "Lorem ipsum dolor sit amet..", comes from a line in section 1.10.32
   ''';
   static final POST_TABLE = "posts";
+  static int currentId = 0;
+  static PostModel currentPost;
 
   static Future<Database> getConn()async{
     return await openDatabase(

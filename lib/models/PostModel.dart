@@ -32,8 +32,34 @@ class PostModel {
       );
     });
   }
+
+  static Future<PostModel> getPostById(int id) async {
+    Database db = await Global.getConn();
+    List<String> columns = ['id', 'title', 'content', 'imageUrl'];
+    final List<Map<String, dynamic>> map = await db.query(Global.POST_TABLE, columns: columns, where: "id=?", whereArgs: [id]);
+    return PostModel(
+      id: map[0]['id'],
+      title: map[0]['title'],
+      content: map[0]['content'],
+      imageUrl: map[0]['imageUrl'],
+    );
+  }
+  static Future<void> updatePost(PostModel post) async {
+    Database db = await Global.getConn();
+     await db.update(
+        Global.POST_TABLE,
+        post.toMap(),
+        where: "id=?",
+        whereArgs: [post.id]
+    );
+  }
+  static Future<bool> deletePost(int id) async {
+    Database db = await Global.getConn();
+    await db.delete(
+        Global.POST_TABLE,
+        where: "id=?",
+        whereArgs: [id]
+    );
+    return true;
+  }
 }
-
-
-
-
