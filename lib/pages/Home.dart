@@ -8,7 +8,17 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-  List<PostModel> posts = [PostModel(id: 1, title: "Post One", content: "Post One Content", imageUrl: "bm.jpg"), PostModel(id: 2, title: "Post Two", content: "Post Two Content", imageUrl: "coder.png"), PostModel(id: 3, title: "Post Three", content: "Post Three Content", imageUrl: "web.png"), PostModel(id: 1, title: "Post Four", content: "Post Four Content", imageUrl: "ios.png"), PostModel(id: 1, title: "Post Five", content: "Post Five Content", imageUrl: "android.png"), PostModel(id: 1, title: "Post 1", content: "Post One Content", imageUrl: "bm.jpg"), PostModel(id: 2, title: "Post 2", content: "Post Two Content", imageUrl: "coder.png"), PostModel(id: 3, title: "Post 3", content: "Post Three Content", imageUrl: "web.png"), PostModel(id: 1, title: "Post 4", content: "Post Four Content", imageUrl: "ios.png"), PostModel(id: 1, title: "Post 5", content: "Post Five Content", imageUrl: "android.png"), PostModel(id: 1, title: "Post 1", content: "Post One Content", imageUrl: "bm.jpg"), PostModel(id: 2, title: "Post 2", content: "Post Two Content", imageUrl: "coder.png"), PostModel(id: 3, title: "Post 3", content: "Post Three Content", imageUrl: "web.png"), PostModel(id: 1, title: "Post 4", content: "Post Four Content", imageUrl: "ios.png"), PostModel(id: 1, title: "Post 5", content: "Post Five Content", imageUrl: "android.png")];
+  List<PostModel> posts = [];
+
+  loadAllPost() async {
+    posts = await PostModel.getAllPosts();
+    setState((){});
+  }
+
+  initState() {
+    super.initState();
+    loadAllPost();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -16,9 +26,9 @@ class _HomeState extends State<Home> {
         body: Container(
             decoration: BoxDecoration(
               image: DecorationImage(
-                  image: AssetImage("assets/bg.jpg"),
-                  fit: BoxFit.fitWidth,
-                  alignment: Alignment.topLeft,
+                image: AssetImage("assets/bg.jpg"),
+                fit: BoxFit.fitWidth,
+                alignment: Alignment.topLeft,
               ),
             ),
             padding: EdgeInsets.all(20),
@@ -28,9 +38,14 @@ class _HomeState extends State<Home> {
                 SizedBox(height: 30),
                 SizedBox(
                   height: 182,
-                  child: Text(
-                    "Home Page",
-                    style: TextStyle(fontSize: 36, color: Colors.white, fontWeight: FontWeight.bold),
+                  child: GestureDetector(
+                    onTap: () {
+                      Navigator.pushNamed(context, "/post_create");
+                    },
+                    child: Text(
+                      "Home Page",
+                      style: TextStyle(fontSize: 36, color: Colors.white, fontWeight: FontWeight.bold),
+                    ),
                   ),
                 ),
                 Flexible(

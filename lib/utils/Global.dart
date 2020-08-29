@@ -1,3 +1,5 @@
+import 'package:sqflite/sqflite.dart';
+import 'package:path/path.dart';
 class Global {
   static final text = "A Marquee width with ListView,Can scroll vertically or horizontally.The ListView will fill up the space, the height must be set when scrolling horizontally, and the width must be set when scrolling vertically.";
   static final para = '''
@@ -29,4 +31,23 @@ class Global {
     treatise on the theory of ethics, very popular during the Renaissance. The first line 
     of Lorem Ipsum, "Lorem ipsum dolor sit amet..", comes from a line in section 1.10.32
   ''';
+  static final POST_TABLE = "posts";
+
+  static Future<Database> getConn()async{
+    return await openDatabase(
+      join(await getDatabasesPath(), 'post_database.db'),
+      onCreate: (db,version){
+        return db.execute( ''' 
+          CREATE TABLE $POST_TABLE(
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            title TEXT,
+            content TEXT,
+            imageUrl TEXT
+          )
+          ''' );
+      },
+      version: 1
+    );
+  }
+
 }
