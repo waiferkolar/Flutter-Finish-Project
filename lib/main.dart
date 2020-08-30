@@ -1,3 +1,4 @@
+import 'package:donno/pages/Anim.dart';
 import 'package:donno/pages/Detail.dart';
 import 'package:donno/pages/Flash.dart';
 import 'package:donno/pages/Home.dart';
@@ -10,7 +11,7 @@ void main() {
   runApp(MaterialApp(
     debugShowCheckedModeBanner: false,
     routes: {
-      "/": (context) => Uploader(),
+      "/": (context) => Anim(),
       "/home": (context) => Home(),
       "/detail": (context) => Detail(),
       "/post_create": (context) => PostCreate(),

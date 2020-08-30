@@ -17,6 +17,7 @@ dependencies:
   marquee_flutter: ^0.1.4
   shimmer: ^1.1.1
   image_picker: ^0.6.7+7
+  tuple: ^1.0.3
 
 dev_dependencies:
   flutter_test:
